@@ -1,0 +1,16 @@
+﻿extends layout
+
+block content
+  h1= title
+  div(class='row')
+    div(class='col-md-4')
+          table(class='table table-striped')
+            tr
+                th
+                    | Player Name
+            each p in plist
+                tr
+                    td
+                        a(href='/players/' + p.path.key)
+                            = p.value.name
+    div(class='col-md-8')

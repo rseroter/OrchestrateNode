@@ -1,0 +1,68 @@
+﻿extends layout
+
+block content
+  script(type='text/javascript').
+    
+    function ConvertDate(epochSeconds)
+    {
+
+        var dt = new Date(epochSeconds * 1000)
+        
+        document.write(dt.toGMTString())
+        
+     }
+
+  h1= title
+  div(class='row')
+    div(class='col-md-4')
+        h3= profile.name 
+        table.table
+            tr
+               td(style='text-align:right')
+                    b Team  
+               td= profile.team
+            tr
+               td(style='text-align:right')
+                    b Position  
+               td= profile.position
+            tr
+               td(style='text-align:right')
+                    b Career PPG  
+               td= profile.careerppg
+            tr
+               td(style='text-align:right')
+                    b Career RPG  
+               td= profile.careerrpg
+
+
+        //count
+        if plist.count != 0
+            b Teammates
+                table(class='table table-striped')
+                    each p in plist.results
+                        tr
+                            td
+                                = p.value.name
+        else
+            b No teammate relationships established!
+
+
+        //count
+        if elist.count != 0
+            b Game log
+            table(class='table table-striped')
+                    each p in elist.results
+                        tr
+                            td
+                                script.
+                                    ConvertDate(#{p.path.timestamp})
+                            td
+                                = p.value.opponent
+        else
+            b No game log!
+
+
+
+        
+
+    div(class='col-md-8')
